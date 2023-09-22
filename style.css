@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+body{
+    background-color: rgb(252, 205, 255);
+    color: black;
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.content{
+    padding: 1rem;
+    border-radius: 10px;
+    width: 30%;
+    min-width: 30%;
+    overflow: auto;
+    text-align: justify;
+}
