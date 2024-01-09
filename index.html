@@ -1,53 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cuidadora Priscila Ferrer</title>
-    <link rel="stylesheet" href="style.css"/>
-    <style>
-      p {
-        font-family: Arial, Helvetica, sans-serif;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Cuidadora - Priscila Ferrer</h1>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuidadora de Idosos</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <header>
+    <h1>Cuidadora de Idosos - Priscila Ferrer</h1>
     <hr />
-    <p class="servico">
-      <img src="imagens/lupa.ico.png" alt="" />
-      <strong>Confira os serviços:</strong>
-    </p>
-    <div class="content">
-      <ol>
-        <li type="circle">Higiene, Alimentação lazer e Medicamentos;</li>
-        <li type="circle">Hospitalar e Residencial;</li>
-        <li type="circle">Acamados/semi-independente;</li>
-        <li type="circle">Dama de Companhia;</li>
-        <li type="circle">Acompanhamento de exames.</li>
-      </ol>
-    </div>
+  </header>
 
-    <img src="imagens/idosos.png" alt="" />
-    <p><strong>Home care (Idosos):</strong></p>
-    <p>Valor: R$ 149,99.</p>
-    <p><strong>Home care (Crianças Inclusivas):</strong></p>
-    <p>Valor: R$ 149,99.</p>
+  <nav>
+    <article>
+      <h2>Serviços Oferecidos:</h2>
+      <ul>
+        <li>Assistência na higiene e cuidados pessoais;</li>
+        <li>Acompanhamento em atividades de lazer;</li>
+        <li>Administração de medicamentos;</li>
+        <li>Auxílio na alimentação;</li>
+        <li>Atenção especial a acamados e semi-independentes.</li>
+      </ul>
+    </article>
+  </nav>
 
-    <strong>
-      <p>Contato:</p>
-    </strong>
+  <section>
+    <article>
+      <h2>Home Care para Idosos</h2>
+      <p>Oferecemos cuidado especializado para proporcionar conforto e qualidade de vida aos idosos.</p>
+      <p>Valor do serviço: a partir de R$ 200,00.</p>
+    </article>
 
-    <li type="square">
-      <img src="imagens/LinkedIn.png" /> Priscila Ferrer da Silva.
-    </li>
-    <li type="square">
-      <img src="imagens/Whatsapp.png" /> +55 (11) 97353-1120.
+    <article>
+      <h2>Depoimentos</h2>
+      <p>"A Priscila é uma cuidadora excepcional. Minha família está muito satisfeita com os cuidados prestados à nossa avó."</p>
+      <p>"Profissionalismo e carinho definem o trabalho da Priscila. Recomendo a todos que buscam um cuidado dedicado."</p>
+    </article>
+  </section>
 
-      <strong>
-        <p>+ De 50 clientes acolhidos.</p>
-      </strong>
-    </li>
-  </body>
+  <footer>
+    <article>
+      <h2>Entre em Contato</h2>
+      <form id="contactForm">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone">Telefone:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{2}\s[0-9]{5}-[0-9]{4}" placeholder="Formato: 11 98765-4321" required>
+
+        <button type="button" onclick="validateForm()">Enviar</button>
+      </form>
+
+      <p>Mais de 50 clientes acolhidos com carinho e dedicação.</p>
+    </article>
+  </footer>
+
+  <script>
+    function validateForm() {
+      var name = document.getElementById("name").value;
+      var phone = document.getElementById("phone").value;
+
+      // Basic validation - check if the name and phone are not empty
+      if (name.trim() === "" || phone.trim() === "") {
+        alert("Por favor, preencha todos os campos.");
+      } else {
+        alert("Formulário enviado com sucesso!\nNome: " + name + "\nTelefone: " + phone);
+        // You can add additional logic here, such as sending the form data to a server.
+      }
+    }
+  </script>
+
+</body>
+
 </html>
