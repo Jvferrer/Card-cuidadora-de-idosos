@@ -20,6 +20,8 @@
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <a class="skip-link skip-link-secondary" href="#contato">Pular para contato</a>
+    <p id="assistive-status" class="sr-only" aria-live="polite"></p>
 
     <header class="site-header">
       <nav class="nav container" aria-label="Navegação principal">
@@ -31,12 +33,21 @@
           </span>
         </a>
 
-        <ul class="menu">
-          <li><a href="#servicos">Serviços</a></li>
-          <li><a href="#como-funciona">Como funciona</a></li>
-          <li><a href="#contato">Contato</a></li>
-        </ul>
-        <a class="nav-cta whatsapp-link" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <div class="header-actions">
+          <ul class="menu">
+            <li><a href="#servicos" aria-keyshortcuts="Alt+S">Serviços</a></li>
+            <li><a href="#como-funciona">Como funciona</a></li>
+            <li><a href="#contato" aria-keyshortcuts="Alt+C">Contato</a></li>
+          </ul>
+          <a
+            class="nav-cta whatsapp-link"
+            href="#"
+            target="_blank"
+            rel="noopener"
+            aria-keyshortcuts="Alt+W"
+            >WhatsApp</a
+          >
+        </div>
       </nav>
     </header>
 
@@ -281,21 +292,21 @@
           </div>
 
           <div class="faq-list">
-            <details>
+            <details id="faq-preco">
               <summary>O valor é sempre R$ 199,00?</summary>
               <p>
                 Esse é o valor inicial. O orçamento final depende da carga horária, deslocamento,
                 rotina e nível de cuidado necessário.
               </p>
             </details>
-            <details>
+            <details id="faq-acamados">
               <summary>Atende idosos acamados?</summary>
               <p>
                 Sim, o atendimento pode ser combinado para idosos independentes, semi-independentes
                 ou acamados, conforme a necessidade da família.
               </p>
             </details>
-            <details>
+            <details id="faq-contratacao">
               <summary>Como faço para contratar?</summary>
               <p>
                 Clique no botão de WhatsApp, explique a situação e combine uma orientação inicial
@@ -329,16 +340,34 @@
 
     <footer class="footer">
       <div class="container footer-content">
-        <div>
+        <div class="footer-column footer-main">
           <p class="footer-brand">Priscila Ferrer</p>
-          <p>Cuidadora de idosos e home care com atendimento humanizado.</p>
+          <p class="footer-description">
+            Cuidadora de idosos e home care com atendimento humanizado, profissional e acolhedor.
+          </p>
         </div>
 
-        <div class="footer-meta">
+        <div class="footer-column">
+          <p class="footer-title">Navegação</p>
+          <ul class="footer-links">
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#como-funciona">Como funciona</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <p class="footer-title">FAQ rápido</p>
+          <ul class="footer-links footer-faq-links">
+            <li><a href="#faq-preco">Preço inicial</a></li>
+            <li><a href="#faq-acamados">Atende acamados?</a></li>
+            <li><a href="#faq-contratacao">Como contratar</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column footer-meta">
           <span class="version-badge">v1.0</span>
-          <p class="copyright">
-            &copy; <span id="current-year"></span> Todos os direitos reservados.
-          </p>
+          <p class="copyright">&copy; <span id="current-year"></span> Priscila Ferrer</p>
         </div>
       </div>
     </footer>
