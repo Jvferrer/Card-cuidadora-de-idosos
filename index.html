@@ -1,77 +1,346 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Cuidadora de idosos com atendimento humanizado em home care, apoio nas rotinas diárias, higiene, alimentação, medicamentos e acompanhamento familiar."
+    />
+    <meta name="theme-color" content="#3f2433" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Priscila Ferrer | Cuidadora de Idosos" />
+    <meta
+      property="og:description"
+      content="Cuidado humanizado para idosos, com carinho, segurança e suporte direto pelo WhatsApp."
+    />
+    <title>Priscila Ferrer | Cuidadora de Idosos e Home Care</title>
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cuidadora de Idosos</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
-</head>
+    <header class="site-header">
+      <nav class="nav container" aria-label="Navegação principal">
+        <a class="brand" href="#inicio" aria-label="Inicio">
+          <span class="brand-mark">PF</span>
+          <span>
+            <strong>Priscila Ferrer</strong>
+            <small>Cuidadora de idosos</small>
+          </span>
+        </a>
 
-<body>
+        <ul class="menu">
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+        <a class="nav-cta whatsapp-link" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      </nav>
+    </header>
 
-  <header>
-    <h1>Cuidadora de Idosos - Priscila Ferrer</h1>
-    <hr />
-  </header>
+    <main id="conteudo">
+      <section id="inicio" class="hero">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <p class="eyebrow">Cuidadora de idosos em domicílio</p>
+            <h1>Cuidado humanizado para sua família se sentir tranquila.</h1>
+            <p class="hero-text">
+              Apoio na rotina, higiene, alimentação, medicamentos e companhia, com respeito,
+              paciência e contato direto com a família.
+            </p>
 
-  <nav>
-    <article>
-      <h2>Serviços Oferecidos:</h2>
-      <ul>
-        <li>Assistência na higiene e cuidados pessoais;</li>
-        <li>Acompanhamento em atividades de lazer;</li>
-        <li>Administração de medicamentos;</li>
-        <li>Auxílio na alimentação;</li>
-        <li>Atenção especial a acamados e semi-independentes.</li>
-      </ul>
-    </article>
-  </nav>
+            <div class="hero-actions">
+              <a
+                class="button button-primary whatsapp-link"
+                href="#"
+                target="_blank"
+                rel="noopener"
+              >
+                Chamar no WhatsApp
+              </a>
+              <a class="button button-secondary" href="#como-funciona">Como funciona</a>
+            </div>
 
-  <section>
-    <article>
-      <h2>Home Care para Idosos</h2>
-      <p>Oferecemos cuidado especializado para proporcionar conforto e qualidade de vida aos idosos.</p>
-      <p>Valor do serviço: a partir de R$ 200,00.</p>
-    </article>
+            <ul class="trust-list" aria-label="Pontos de confiança">
+              <li>Atendimento domiciliar</li>
+              <li>Rotina com segurança</li>
+              <li>Contato direto com a família</li>
+            </ul>
 
-    <article>
-      <h2>Depoimentos</h2>
-      <p>"A Priscila é uma cuidadora excepcional. Minha família está muito satisfeita com os cuidados prestados à nossa avó."</p>
-      <p>"Profissionalismo e carinho definem o trabalho da Priscila. Recomendo a todos que buscam um cuidado dedicado."</p>
-    </article>
-  </section>
+            <div class="hero-proof" aria-label="Garantias do atendimento">
+              <span>Primeira conversa sem compromisso</span>
+              <span>Orçamento direto pelo WhatsApp</span>
+            </div>
+          </div>
 
-  <footer>
-    <article>
-      <h2>Entre em Contato</h2>
-      <form id="contactForm">
-        <label for="name">Nome:</label>
-        <input type="text" id="name" name="name" required>
+          <aside class="hero-card" aria-label="Resumo do atendimento">
+            <span class="hero-card-label">Atendimento</span>
+            <h2>Cuidados no conforto do lar</h2>
+            <p>
+              Suporte para idosos independentes, semi-independentes ou acamados, com orientação
+              familiar e acompanhamento da rotina.
+            </p>
+            <div class="price-card">
+              <span>A partir de</span>
+              <strong>R$ 199,00</strong>
+              <small>Valor ajustado conforme necessidade e carga horária.</small>
+            </div>
+          </aside>
+        </div>
+      </section>
 
-        <label for="phone">Telefone:</label>
-        <input type="tel" id="phone" name="phone" pattern="[0-9]{2}\s[0-9]{5}-[0-9]{4}" placeholder="Formato: 11 98765-4321" required>
+      <section class="stats" aria-label="Indicadores de confiança">
+        <div class="container stats-grid">
+          <div>
+            <strong>50+</strong>
+            <span>famílias acolhidas</span>
+          </div>
+          <div>
+            <strong>100%</strong>
+            <span>atendimento humanizado</span>
+          </div>
+          <div>
+            <strong>WhatsApp</strong>
+            <span>orçamento rápido e direto</span>
+          </div>
+        </div>
+      </section>
 
-        <button type="button" onclick="validateForm()">Enviar</button>
-      </form>
+      <section id="servicos" class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Serviços</p>
+            <h2>Como posso ajudar sua família</h2>
+            <p>
+              Cada família tem uma rotina diferente. O atendimento é combinado conforme a
+              necessidade do idoso e as orientações dos familiares.
+            </p>
+          </div>
 
-      <p>Mais de 50 clientes acolhidos com carinho e dedicação.</p>
-    </article>
-  </footer>
+          <div class="cards-grid">
+            <article class="card">
+              <h3>Cuidados pessoais</h3>
+              <p>
+                Auxílio na higiene, banho, troca de roupas, conforto e prevenção de riscos na
+                rotina.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Alimentação e hidratação</h3>
+              <p>Apoio nas refeições, incentivo à hidratação e observação de sinais importantes.</p>
+            </article>
+            <article class="card">
+              <h3>Medicamentos</h3>
+              <p>
+                Acompanhamento dos horários conforme orientação da família e dos profissionais de
+                saúde.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Companhia e bem-estar</h3>
+              <p>
+                Presença acolhedora, conversa, atividades leves e suporte emocional no dia a dia.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Acompanhamentos</h3>
+              <p>Suporte em consultas, exames, passeios curtos e atividades externas combinadas.</p>
+            </article>
+            <article class="card">
+              <h3>Acamados e semi-independentes</h3>
+              <p>Atenção especial para conforto, mobilidade, rotina segura e apoio contínuo.</p>
+            </article>
+          </div>
+        </div>
+      </section>
 
-  <script>
-    function validateForm() {
-      var name = document.getElementById("name").value;
-      var phone = document.getElementById("phone").value;
+      <section id="como-funciona" class="section process-section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Como funciona</p>
+            <h2>Do primeiro contato ao cuidado no lar, tudo de forma simples.</h2>
+            <p>
+              O atendimento começa com uma conversa para entender a rotina, o perfil do idoso e o
+              tipo de suporte que a família precisa.
+            </p>
+          </div>
 
-      if (name.trim() === "" || phone.trim() === "") {
-        alert("Por favor, preencha todos os campos.");
-      } else {
-        alert("Formulário enviado com sucesso!\nNome: " + name + "\nTelefone: " + phone);
-      }
-    }
-  </script>
-</body>
+          <div class="process-grid">
+            <article class="process-card">
+              <span>01</span>
+              <h3>Você chama no WhatsApp</h3>
+              <p>Conte a necessidade da família, horários desejados e principais cuidados.</p>
+            </article>
+            <article class="process-card">
+              <span>02</span>
+              <h3>Alinhamos a rotina</h3>
+              <p>
+                Combinamos tarefas, frequência, orientações importantes e formato do atendimento.
+              </p>
+            </article>
+            <article class="process-card">
+              <span>03</span>
+              <h3>O cuidado começa</h3>
+              <p>
+                O idoso recebe apoio humanizado e a família acompanha tudo com mais tranquilidade.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="diferenciais" class="section section-soft">
+        <div class="container split">
+          <div>
+            <p class="eyebrow">Diferenciais</p>
+            <h2>Um cuidado que também tranquiliza a família</h2>
+            <p>
+              Além do cuidado direto com o idoso, o atendimento busca manter a família informada,
+              segura e confiante sobre a rotina.
+            </p>
+          </div>
+
+          <div class="feature-list">
+            <article>
+              <h3>Escuta e acolhimento</h3>
+              <p>Atendimento com paciência, respeito à história do idoso e atenção aos detalhes.</p>
+            </article>
+            <article>
+              <h3>Rotina combinada</h3>
+              <p>
+                Cuidados alinhados com a família para preservar hábitos, horários e preferências.
+              </p>
+            </article>
+            <article>
+              <h3>Comunicação clara</h3>
+              <p>
+                Contato direto pelo WhatsApp para tirar dúvidas e combinar detalhes do atendimento.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section assurance-section" aria-label="Segurança e confiança">
+        <div class="container assurance-card">
+          <div>
+            <p class="eyebrow">Confiança</p>
+            <h2>Mais segurança para a família, mais acolhimento para o idoso.</h2>
+            <p>
+              O foco é oferecer um atendimento próximo, respeitoso e combinado com clareza para que
+              todos saibam o que esperar desde o primeiro contato.
+            </p>
+          </div>
+
+          <ul class="assurance-list">
+            <li>Comunicação transparente com familiares</li>
+            <li>Cuidados adaptados à rotina da casa</li>
+            <li>Atenção a sinais de desconforto e mudanças no dia a dia</li>
+            <li>Postura respeitosa, discreta e humanizada</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="depoimentos" class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Depoimentos</p>
+            <h2>Famílias que já confiaram nesse cuidado</h2>
+          </div>
+
+          <div class="testimonials-grid">
+            <blockquote>
+              <p>
+                "A Priscila cuidou da nossa mãe com muito carinho, paciência e responsabilidade."
+              </p>
+              <cite>Família atendida</cite>
+            </blockquote>
+            <blockquote>
+              <p>"Profissional cuidadosa, pontual e sempre atenta aos detalhes da rotina."</p>
+              <cite>Cliente de home care</cite>
+            </blockquote>
+            <blockquote>
+              <p>"Nos sentimos mais tranquilos sabendo que havia alguém de confiança por perto."</p>
+              <cite>Familiar responsável</cite>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section id="duvidas" class="section faq-section">
+        <div class="container split">
+          <div>
+            <p class="eyebrow">Dúvidas frequentes</p>
+            <h2>Perguntas que ajudam a decidir com mais segurança.</h2>
+            <p>
+              Antes de contratar, é normal querer entender como funciona. Veja algumas respostas
+              rápidas e chame no WhatsApp para conversar sobre o seu caso.
+            </p>
+          </div>
+
+          <div class="faq-list">
+            <details>
+              <summary>O valor é sempre R$ 199,00?</summary>
+              <p>
+                Esse é o valor inicial. O orçamento final depende da carga horária, deslocamento,
+                rotina e nível de cuidado necessário.
+              </p>
+            </details>
+            <details>
+              <summary>Atende idosos acamados?</summary>
+              <p>
+                Sim, o atendimento pode ser combinado para idosos independentes, semi-independentes
+                ou acamados, conforme a necessidade da família.
+              </p>
+            </details>
+            <details>
+              <summary>Como faço para contratar?</summary>
+              <p>
+                Clique no botão de WhatsApp, explique a situação e combine uma orientação inicial
+                para definir o melhor formato de atendimento.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="contato" class="section cta-section">
+        <div class="container cta-card">
+          <div>
+            <p class="eyebrow">Contato</p>
+            <h2>Converse agora e receba uma orientação inicial.</h2>
+            <p>
+              Envie uma mensagem pelo WhatsApp contando a necessidade da família. Assim fica mais
+              fácil indicar o melhor formato de atendimento.
+            </p>
+          </div>
+          <a class="button button-primary whatsapp-link" href="#" target="_blank" rel="noopener">
+            Solicitar orçamento pelo WhatsApp
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <a class="floating-whatsapp whatsapp-link" href="#" target="_blank" rel="noopener">
+      Falar no WhatsApp
+    </a>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <div>
+          <p class="footer-brand">Priscila Ferrer</p>
+          <p>Cuidadora de idosos e home care com atendimento humanizado.</p>
+        </div>
+
+        <div class="footer-meta">
+          <span class="version-badge">v1.0</span>
+          <p class="copyright">
+            &copy; <span id="current-year"></span> Todos os direitos reservados.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
