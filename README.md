@@ -74,6 +74,12 @@ Rode os testes automatizados:
 npm run test
 ```
 
+Execute o gate completo de QA:
+
+```bash
+npm run qa
+```
+
 Antes de publicar, o fluxo recomendado é:
 
 ```bash
@@ -81,6 +87,8 @@ npm run lint
 npm run test
 npm run build
 ```
+
+Para um processo de qualidade mais formal (inspiração ISTQB), use o checklist em `QA_CHECKLIST_ISTQB.md`.
 
 ## Publicação
 

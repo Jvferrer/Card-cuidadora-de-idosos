@@ -10,15 +10,17 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "qa": "npm run lint && npm run test && npm run build"
   },
   "devDependencies": {
     "@eslint/js": "latest",
     "eslint": "latest",
+    "jsdom": "^29.1.1",
     "prettier": "latest",
     "typescript": "latest",
     "typescript-eslint": "latest",
-    "vitest": "latest",
-    "vite": "latest"
+    "vite": "latest",
+    "vitest": "latest"
   }
 }
