@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     {
       headers: {
         "cache-control": "private, no-store",
-        "set-cookie": loginCookie(expected),
+        "set-cookie": loginCookie(expected, request),
       },
     },
   );

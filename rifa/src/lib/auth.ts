@@ -23,9 +23,11 @@ export function isAuthorized(request: Request): boolean {
   return a.length === b.length && timingSafeEqual(a, b);
 }
 
-export function loginCookie(code: string): string {
+export function loginCookie(code: string, request?: Request): string {
   const value = tokenFor(code);
-  return `${COOKIE}=${value}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000`;
+  const proto = request?.headers.get("x-forwarded-proto") ?? "";
+  const secure = proto.includes("https") || Boolean(request?.url.startsWith("https:"));
+  return `${COOKIE}=${value}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000${secure ? "; Secure" : ""}`;
 }
 
 export function unauthorized(): Response {
