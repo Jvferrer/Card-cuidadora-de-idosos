@@ -66,6 +66,7 @@ export default function Page() {
       setAuthed(false);
       return;
     }
+    if (!tRes.ok || !rRes.ok) return;
     setAuthed(true);
     setTickets(await tRes.json());
     setResumo(await rRes.json());

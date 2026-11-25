@@ -1,6 +1,8 @@
 import { isAuthorized, unauthorized } from "@/lib/auth";
 import { updateTicket } from "@/lib/tickets";
 
+export const dynamic = "force-dynamic";
+
 export async function PATCH(
   request: Request,
   context: { params: Promise<{ n: string }> },

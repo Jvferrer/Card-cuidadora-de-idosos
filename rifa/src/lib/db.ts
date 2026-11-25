@@ -22,7 +22,7 @@ export async function sql<T = Record<string, unknown>>(
 }
 
 async function startLocal(): Promise<PGlite> {
-  const db = new PGlite();
+  const db = new PGlite("data/pglite");
   const files = (await readdir("migrations").catch(() => []))
     .filter((f) => f.endsWith(".sql"))
     .sort();

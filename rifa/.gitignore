@@ -1,3 +1,5 @@
 node_modules
 .next
 *.tsbuildinfo
+data/seed.local.json
+data/pglite/

@@ -1,4 +1,4 @@
-import seed from "../../data/seed.json";
+import { readFile } from "node:fs/promises";
 import { sql } from "./db";
 
 export type Ticket = {
@@ -25,8 +25,17 @@ export type Resumo = {
   numerosParaSeteMil: number;
 };
 
+type SeedRow = {
+  n: number;
+  bilhete: string;
+  comprador: string;
+  telefone: string;
+  pagamento: string;
+};
+
 const PRECO = 20;
 const META = 7000;
+const TOTAL = 1000;
 
 const SITUACAO_SQL = `case
   when btrim(comprador) = '' then 'Livre'
@@ -35,17 +44,39 @@ const SITUACAO_SQL = `case
   else 'Reservado'
 end`;
 
-export async function ensureSeeded(): Promise<void> {
-  const rows = await sql<{ c: string }>("select count(*)::text as c from tickets");
-  if (Number(rows[0]?.c ?? 0) > 0) return;
+const PAGO_SQL = `btrim(comprador) <> '' and pagamento = 'Pago'`;
 
-  const items = seed as Array<{
-    n: number;
-    bilhete: string;
-    comprador: string;
-    telefone: string;
-    pagamento: string;
-  }>;
+let seeding: Promise<void> | null = null;
+
+function emptySeed(): SeedRow[] {
+  return Array.from({ length: TOTAL }, (_, i) => {
+    const n = i + 1;
+    return {
+      n,
+      bilhete: String(n).padStart(3, "0"),
+      comprador: "",
+      telefone: "",
+      pagamento: "",
+    };
+  });
+}
+
+async function loadSeedItems(): Promise<SeedRow[]> {
+  try {
+    const raw = await readFile("data/seed.local.json", "utf8");
+    const parsed = JSON.parse(raw) as SeedRow[];
+    if (Array.isArray(parsed) && parsed.length === TOTAL) return parsed;
+  } catch {
+    // Published deploys do not ship buyer PII; start with blank numbers.
+  }
+  return emptySeed();
+}
+
+async function seedOnce(): Promise<void> {
+  const rows = await sql<{ c: string }>("select count(*)::text as c from tickets");
+  if (Number(rows[0]?.c ?? 0) >= TOTAL) return;
+
+  const items = await loadSeedItems();
   const chunkSize = 100;
   for (let i = 0; i < items.length; i += chunkSize) {
     const chunk = items.slice(i, i + chunkSize);
@@ -56,10 +87,20 @@ export async function ensureSeeded(): Promise<void> {
       return `($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5})`;
     });
     await sql(
-      `insert into tickets (n, bilhete, comprador, telefone, pagamento) values ${placeholders.join(",")}`,
+      `insert into tickets (n, bilhete, comprador, telefone, pagamento)
+       values ${placeholders.join(",")}
+       on conflict (n) do nothing`,
       values,
     );
   }
+}
+
+export async function ensureSeeded(): Promise<void> {
+  seeding ??= seedOnce().catch((error: unknown) => {
+    seeding = null;
+    throw error;
+  });
+  await seeding;
 }
 
 export async function listTickets(): Promise<Ticket[]> {
@@ -82,7 +123,7 @@ export async function getResumo(): Promise<Resumo> {
   }>(`select
       count(*)::text as total,
       count(*) filter (where btrim(comprador) = '')::text as livres,
-      count(*) filter (where pagamento = 'Pago')::text as pagos,
+      count(*) filter (where ${PAGO_SQL})::text as pagos,
       count(*) filter (where btrim(comprador) <> '' and pagamento = 'Pendente')::text as pendentes,
       count(*) filter (where btrim(comprador) <> '' and pagamento <> 'Pago' and pagamento <> 'Pendente')::text as reservados
     from tickets`);

@@ -1,6 +1,8 @@
 import { isAuthorized, unauthorized } from "@/lib/auth";
 import { markBuyerPaid } from "@/lib/tickets";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   if (!isAuthorized(request)) return unauthorized();
   const body = (await request.json().catch(() => null)) as { comprador?: string } | null;
