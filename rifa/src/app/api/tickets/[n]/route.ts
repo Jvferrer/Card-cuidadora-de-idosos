@@ -1,11 +1,11 @@
-import { isAuthorized, unauthorized } from "@/lib/auth";
+import { isAuthorized, sameOrigin, unauthorized } from "@/lib/auth";
 import { updateTicket } from "@/lib/tickets";
 
 export async function PATCH(
   request: Request,
   context: { params: Promise<{ n: string }> },
 ) {
-  if (!isAuthorized(request)) return unauthorized();
+  if (!sameOrigin(request) || !isAuthorized(request)) return unauthorized();
   const { n: raw } = await context.params;
   const n = Number(raw);
   if (!Number.isInteger(n) || n < 1 || n > 1000) {
@@ -24,8 +24,8 @@ export async function PATCH(
   }
 
   const ticket = await updateTicket(n, {
-    comprador: body.comprador !== undefined ? String(body.comprador).trim() : undefined,
-    telefone: body.telefone !== undefined ? String(body.telefone).trim() : undefined,
+    comprador: body.comprador !== undefined ? String(body.comprador).trim().slice(0, 120) : undefined,
+    telefone: body.telefone !== undefined ? String(body.telefone).trim().slice(0, 32) : undefined,
     pagamento,
   });
   if (!ticket) return Response.json({ error: "não encontrado" }, { status: 404 });

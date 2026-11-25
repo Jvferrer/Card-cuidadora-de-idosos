@@ -123,6 +123,7 @@ button {
   display: flex;
   gap: 8px;
   margin: 16px 0 12px;
+  overflow-x: auto;
 }
 
 .tabs button,
@@ -295,4 +296,17 @@ button {
 .note {
   color: var(--muted);
   font-size: 13px;
+}
+
+.toast {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 30;
+  background: var(--navy);
+  color: #fff;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
 }

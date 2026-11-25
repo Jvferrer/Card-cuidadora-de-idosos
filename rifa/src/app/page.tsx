@@ -30,6 +30,8 @@ type Resumo = {
 
 type Tab = "painel" | "cobrar" | "numeros";
 
+const PAGE_SIZE = 80;
+
 function brl(n: number) {
   return n.toLocaleString("pt-BR", {
     style: "currency",
@@ -58,17 +60,27 @@ export default function Page() {
   const [edit, setEdit] = useState<Ticket | null>(null);
   const [busy, setBusy] = useState(false);
   const [toast, setToast] = useState("");
+  const [bootError, setBootError] = useState("");
+  const [formError, setFormError] = useState("");
+  const [shown, setShown] = useState(PAGE_SIZE);
 
   async function load() {
     const [tRes, rRes] = await Promise.all([fetch("/api/tickets"), fetch("/api/resumo")]);
     if (tRes.status === 401 || rRes.status === 401) {
       setNeedsCode(true);
       setAuthed(false);
-      return;
+      setResumo(null);
+      return false;
+    }
+    if (!tRes.ok || !rRes.ok) {
+      setBootError("Não deu para carregar a lista. Puxe para atualizar.");
+      return false;
     }
     setAuthed(true);
+    setBootError("");
     setTickets(await tRes.json());
     setResumo(await rRes.json());
+    return true;
   }
 
   useEffect(() => {
@@ -80,9 +92,22 @@ export default function Page() {
           setAuthed(true);
           return load();
         }
+        if (s.needsCode) setBootError("");
       })
-      .catch(() => setNeedsCode(false));
+      .catch(() => {
+        setNeedsCode(true);
+        setBootError("Sem conexão com o painel.");
+      });
   }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (document.visibilityState !== "visible" || busy) return;
+      if (!authed) return;
+      void load();
+    }, 8000);
+    return () => clearInterval(id);
+  }, [authed, busy]);
 
   async function login(event: FormEvent) {
     event.preventDefault();
@@ -92,6 +117,10 @@ export default function Page() {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ code }),
     });
+    if (res.status === 429) {
+      setLoginError("Muitas tentativas. Espere alguns minutos.");
+      return;
+    }
     if (!res.ok) {
       setLoginError("Código incorreto.");
       return;
@@ -112,7 +141,11 @@ export default function Page() {
       }),
     });
     setBusy(false);
-    if (!res.ok) return;
+    if (!res.ok) {
+      setFormError("Não salvou. Tente de novo.");
+      return;
+    }
+    setFormError("");
     setEdit(null);
     setToast("Salvo");
     await load();
@@ -120,27 +153,39 @@ export default function Page() {
 
   async function markPaid(ticket: Ticket) {
     setBusy(true);
-    await fetch(`/api/tickets/${ticket.n}`, {
+    const res = await fetch(`/api/tickets/${ticket.n}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ pagamento: "Pago" }),
     });
     setBusy(false);
+    if (!res.ok) {
+      setToast("Não marcou como pago.");
+      return;
+    }
     setToast(`${ticket.bilhete} marcado como pago`);
     await load();
   }
 
   async function markBuyerPaid(comprador: string) {
     setBusy(true);
-    await fetch("/api/bulk", {
+    const res = await fetch("/api/bulk", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ comprador }),
     });
     setBusy(false);
+    if (!res.ok) {
+      setToast("Não confirmou os pagos.");
+      return;
+    }
     setToast(`Pagos de ${comprador} confirmados`);
     await load();
   }
+
+  useEffect(() => {
+    setShown(PAGE_SIZE);
+  }, [q, filtro]);
 
   const filtered = useMemo(() => {
     const query = q.trim().toLowerCase();
@@ -188,6 +233,7 @@ export default function Page() {
           <p className="note">Rifa Inazuma</p>
           <h1>Digite o código</h1>
           <p className="note">O mesmo código combinado no WhatsApp.</p>
+          {bootError ? <p className="error">{bootError}</p> : null}
           <input
             value={code}
             onChange={(e) => setCode(e.target.value)}
@@ -207,10 +253,12 @@ export default function Page() {
   if (!resumo) {
     return (
       <div className="app">
-        <p className="note">Carregando o painel…</p>
+        <p className="note">{bootError || "Carregando o painel…"}</p>
       </div>
     );
   }
+
+  const pct = resumo.total ? Math.round((resumo.pagos / resumo.total) * 100) : 0;
 
   return (
     <div className="app">
@@ -248,7 +296,7 @@ export default function Page() {
       </div>
       <p className="note">
         {resumo.pagos} pagos · {resumo.pendentes + resumo.reservados} a cobrar · {resumo.livres}{" "}
-        livres · {Math.round((resumo.pagos / resumo.total) * 100)}% da rifa
+        livres · {pct}% da rifa
       </p>
 
       <nav className="tabs">
@@ -277,6 +325,9 @@ export default function Page() {
 
       {tab === "cobrar" ? (
         <section className="list">
+          {cobrar.length === 0 ? (
+            <p className="note">Ninguém pendente para cobrar agora.</p>
+          ) : null}
           {cobrar.map((c) => {
             const link = wa(c.telefone);
             return (
@@ -325,7 +376,7 @@ export default function Page() {
             ))}
           </div>
           <div className="list">
-            {filtered.slice(0, 80).map((t) => (
+            {filtered.slice(0, shown).map((t) => (
               <div className="row" key={t.n}>
                 <button
                   type="button"
@@ -351,15 +402,17 @@ export default function Page() {
                 )}
               </div>
             ))}
-            {filtered.length > 80 ? (
-              <p className="note">Mostrando 80 de {filtered.length}. Afine a busca.</p>
+            {filtered.length > shown ? (
+              <button className="ghost" type="button" onClick={() => setShown((n) => n + PAGE_SIZE)}>
+                Mostrar mais ({shown} de {filtered.length})
+              </button>
             ) : null}
           </div>
         </section>
       ) : null}
 
       {edit ? (
-        <div className="sheet" onClick={() => setEdit(null)}>
+        <div className="sheet" onClick={() => { setEdit(null); setFormError(""); }}>
           <form
             onClick={(e) => e.stopPropagation()}
             onSubmit={(e) => {
@@ -397,33 +450,18 @@ export default function Page() {
                 <option value="Pago">Pago</option>
               </select>
             </label>
+            {formError ? <p className="error">{formError}</p> : null}
             <button className="pay" disabled={busy} type="submit">
               Salvar
             </button>
-            <button className="ghost" type="button" onClick={() => setEdit(null)}>
+            <button className="ghost" type="button" onClick={() => { setEdit(null); setFormError(""); }}>
               Cancelar
             </button>
           </form>
         </div>
       ) : null}
 
-      {toast ? (
-        <p
-          style={{
-            position: "fixed",
-            left: 16,
-            right: 16,
-            bottom: 16,
-            background: "var(--navy)",
-            color: "#fff",
-            padding: 12,
-            borderRadius: 12,
-            textAlign: "center",
-          }}
-        >
-          {toast}
-        </p>
-      ) : null}
+      {toast ? <p className="toast">{toast}</p> : null}
     </div>
   );
 }

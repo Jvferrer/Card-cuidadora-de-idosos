@@ -1,26 +1,39 @@
-import { accessCode, isAuthorized, loginCookie, unauthorized } from "@/lib/auth";
-import { timingSafeEqual } from "node:crypto";
+import {
+  accessCode,
+  codesMatch,
+  isAuthorized,
+  isLocalOpen,
+  loginCookie,
+  sameOrigin,
+  unauthorized,
+} from "@/lib/auth";
+import { clientIp, tooManyLogins } from "@/lib/rate-limit";
 
 export async function GET(request: Request) {
-  const code = accessCode();
   return Response.json(
-    { ok: isAuthorized(request), needsCode: code !== "" },
+    { ok: isAuthorized(request), needsCode: !isLocalOpen() },
     { headers: { "cache-control": "private, no-store" } },
   );
 }
 
 export async function POST(request: Request) {
+  if (!sameOrigin(request)) return unauthorized();
   const expected = accessCode();
   if (expected === "") {
-    if (process.env.DATABASE_URL?.trim()) return unauthorized();
-    return Response.json({ ok: true }, { headers: { "cache-control": "private, no-store" } });
+    if (isLocalOpen()) {
+      return Response.json({ ok: true }, { headers: { "cache-control": "private, no-store" } });
+    }
+    return unauthorized();
+  }
+  if (tooManyLogins(clientIp(request))) {
+    return Response.json(
+      { error: "too_many" },
+      { status: 429, headers: { "cache-control": "private, no-store" } },
+    );
   }
   const body = (await request.json().catch(() => null)) as { code?: string } | null;
   const got = String(body?.code ?? "");
-  const a = Buffer.from(got);
-  const b = Buffer.from(expected);
-  const valid = a.length === b.length && timingSafeEqual(a, b);
-  if (!valid) return unauthorized();
+  if (!codesMatch(got, expected)) return unauthorized();
   return Response.json(
     { ok: true },
     {

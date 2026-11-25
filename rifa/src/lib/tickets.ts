@@ -35,7 +35,17 @@ const SITUACAO_SQL = `case
   else 'Reservado'
 end`;
 
+let seeding: Promise<void> | undefined;
+
 export async function ensureSeeded(): Promise<void> {
+  seeding ??= seedOnce().catch((error: unknown) => {
+    seeding = undefined;
+    throw error;
+  });
+  await seeding;
+}
+
+async function seedOnce(): Promise<void> {
   const rows = await sql<{ c: string }>("select count(*)::text as c from tickets");
   if (Number(rows[0]?.c ?? 0) > 0) return;
 
@@ -56,7 +66,8 @@ export async function ensureSeeded(): Promise<void> {
       return `($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5})`;
     });
     await sql(
-      `insert into tickets (n, bilhete, comprador, telefone, pagamento) values ${placeholders.join(",")}`,
+      `insert into tickets (n, bilhete, comprador, telefone, pagamento) values ${placeholders.join(",")}
+       on conflict (n) do nothing`,
       values,
     );
   }
@@ -86,6 +97,22 @@ export async function getResumo(): Promise<Resumo> {
       count(*) filter (where btrim(comprador) <> '' and pagamento = 'Pendente')::text as pendentes,
       count(*) filter (where btrim(comprador) <> '' and pagamento <> 'Pago' and pagamento <> 'Pendente')::text as reservados
     from tickets`);
+  if (!row) {
+    return {
+      total: 0,
+      livres: 0,
+      pagos: 0,
+      pendentes: 0,
+      reservados: 0,
+      preco: PRECO,
+      caixa: 0,
+      aReceber: 0,
+      aVender: 0,
+      faltaSeteMil: META,
+      faltaCompletar: 0,
+      numerosParaSeteMil: Math.ceil(META / PRECO),
+    };
+  }
   const livres = Number(row.livres);
   const pagos = Number(row.pagos);
   const pendentes = Number(row.pendentes);
