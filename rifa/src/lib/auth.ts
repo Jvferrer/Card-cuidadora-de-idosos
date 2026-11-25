@@ -12,7 +12,10 @@ function tokenFor(code: string): string {
 
 export function isAuthorized(request: Request): boolean {
   const code = accessCode();
-  if (code === "") return true;
+  if (code === "") {
+    // Local PGlite preview only. Published apps get DATABASE_URL and must stay closed.
+    return process.env.DATABASE_URL?.trim() ? false : true;
+  }
   const cookie = request.headers.get("cookie") ?? "";
   const match = cookie.split(";").map((p) => p.trim()).find((p) => p.startsWith(`${COOKIE}=`));
   if (!match) return false;
@@ -25,7 +28,8 @@ export function isAuthorized(request: Request): boolean {
 
 export function loginCookie(code: string): string {
   const value = tokenFor(code);
-  return `${COOKIE}=${value}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000`;
+  const secure = process.env.NODE_ENV === "production" ? "; Secure" : "";
+  return `${COOKIE}=${value}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000${secure}`;
 }
 
 export function unauthorized(): Response {

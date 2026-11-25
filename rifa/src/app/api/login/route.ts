@@ -12,6 +12,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const expected = accessCode();
   if (expected === "") {
+    if (process.env.DATABASE_URL?.trim()) return unauthorized();
     return Response.json({ ok: true }, { headers: { "cache-control": "private, no-store" } });
   }
   const body = (await request.json().catch(() => null)) as { code?: string } | null;
