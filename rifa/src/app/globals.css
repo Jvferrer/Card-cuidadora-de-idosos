@@ -1,0 +1,298 @@
+:root {
+  --navy: #0b3a7a;
+  --navy-2: #082a5a;
+  --gold: #f5c400;
+  --ink: #122033;
+  --muted: #5c6b7a;
+  --line: #d8dee8;
+  --bg: #f3f5f8;
+  --card: #ffffff;
+  --green: #1f7a4d;
+  --green-bg: #e5f6ec;
+  --yellow: #8a6a00;
+  --yellow-bg: #fff3c4;
+  --red: #b42318;
+  --red-bg: #fde8e6;
+  --orange: #b54708;
+  --orange-bg: #fdead7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px 16px 96px;
+}
+
+.hero {
+  background: var(--navy);
+  color: #fff;
+  border-radius: 16px;
+  padding: 18px 16px;
+}
+
+.hero p {
+  margin: 0 0 6px;
+  color: var(--gold);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.hero .sub {
+  margin-top: 8px;
+  color: #d7e4f7;
+  font-size: 15px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.metric {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  min-width: 0;
+}
+
+.metric span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.metric b {
+  display: block;
+  margin-top: 4px;
+  font-size: 22px;
+  line-height: 1.15;
+  word-break: break-word;
+}
+
+.bar {
+  display: flex;
+  height: 10px;
+  background: #e6e8ee;
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 8px 0 4px;
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0 12px;
+}
+
+.tabs button,
+.filters button {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 12px;
+  min-height: 40px;
+}
+
+.tabs button.active,
+.filters button.active {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.search {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #fff;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+}
+
+.row strong {
+  display: block;
+}
+
+.row small {
+  color: var(--muted);
+}
+
+.tag {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tag.Livre {
+  background: #eef0f3;
+  color: #4b5563;
+}
+.tag.Pago {
+  background: var(--green-bg);
+  color: var(--green);
+}
+.tag.Pendente {
+  background: var(--yellow-bg);
+  color: var(--yellow);
+}
+.tag.Reservado {
+  background: var(--orange-bg);
+  color: var(--orange);
+}
+
+.pay {
+  background: var(--green);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+.ghost {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  min-height: 44px;
+}
+
+.sheet {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 20, 40, 0.45);
+  display: flex;
+  align-items: flex-end;
+  z-index: 20;
+}
+
+.sheet form {
+  background: #fff;
+  width: 100%;
+  border-radius: 16px 16px 0 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sheet h2 {
+  margin: 0;
+}
+
+.sheet label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sheet input,
+.sheet select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.gate {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.gate form {
+  width: min(100%, 360px);
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--line);
+}
+
+.gate h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.error {
+  color: var(--red);
+  font-size: 14px;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 13px;
+}
