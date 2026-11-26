@@ -1,0 +1,137 @@
+{
+  "competencia": "2026-11",
+  "caixinha": {
+    "saldoCentavos": 70000,
+    "negativoCentavos": 0
+  },
+  "lancamentos": [
+    {
+      "id": "carina",
+      "nome": "Carina",
+      "valorCentavos": 20000,
+      "status": "pago",
+      "grupo": "mensalidade",
+      "vencimento": "2026-11-10",
+      "ordem": 1
+    },
+    {
+      "id": "rafael-silva",
+      "nome": "Rafael Silva",
+      "valorCentavos": 30000,
+      "status": "pago",
+      "grupo": "mensalidade",
+      "vencimento": "2026-11-10",
+      "ordem": 2
+    },
+    {
+      "id": "juliano",
+      "nome": "Juliano",
+      "valorCentavos": 25000,
+      "status": "pago",
+      "grupo": "mensalidade",
+      "vencimento": "2026-11-10",
+      "ordem": 3
+    },
+    {
+      "id": "augusto",
+      "nome": "Augusto",
+      "valorCentavos": 25000,
+      "status": "pago",
+      "grupo": "mensalidade",
+      "vencimento": "2026-11-10",
+      "ordem": 4
+    },
+    {
+      "id": "joao-araujo",
+      "nome": "João Araújo",
+      "valorCentavos": 30000,
+      "status": "pago",
+      "grupo": "mensalidade",
+      "vencimento": "2026-11-10",
+      "ordem": 5
+    },
+    {
+      "id": "oziel-mei",
+      "nome": "Oziel (MEI)",
+      "valorCentavos": 10000,
+      "status": "pago",
+      "grupo": "mensalidade",
+      "vencimento": "2026-11-10",
+      "ordem": 6
+    },
+    {
+      "id": "patrick",
+      "nome": "Patrick",
+      "valorCentavos": 25000,
+      "status": "pago",
+      "grupo": "mensalidade",
+      "vencimento": "2026-11-15",
+      "ordem": 7
+    },
+    {
+      "id": "jf-manutencao",
+      "nome": "JF Manutenção",
+      "valorCentavos": 50000,
+      "status": "pago",
+      "grupo": "mensalidade",
+      "vencimento": "2026-11-21",
+      "ordem": 8
+    },
+    {
+      "id": "rafael-vicente-mei",
+      "nome": "Rafael Vicente (MEI)",
+      "valorCentavos": 10000,
+      "status": "pago",
+      "grupo": "mensalidade",
+      "vencimento": "2026-11-24",
+      "ordem": 9
+    },
+    {
+      "id": "cinthya-mei",
+      "nome": "Cinthya (MEI)",
+      "valorCentavos": 7000,
+      "status": "em_aberto",
+      "grupo": "mensalidade",
+      "vencimento": "2026-11-25",
+      "ordem": 10
+    },
+    {
+      "id": "gi-mei-1",
+      "nome": "Gi",
+      "valorCentavos": 10000,
+      "status": "pago",
+      "grupo": "extra",
+      "lote": "gi-mei",
+      "loteTitulo": "Regularização e abertura de MEI Gi",
+      "loteValorCentavos": 20000,
+      "ordem": 11
+    },
+    {
+      "id": "gi-mei-2",
+      "nome": "Gi",
+      "valorCentavos": 10000,
+      "status": "pendente",
+      "grupo": "extra",
+      "lote": "gi-mei",
+      "loteTitulo": "Regularização e abertura de MEI Gi",
+      "loteValorCentavos": 20000,
+      "ordem": 12
+    },
+    {
+      "id": "ronaldo-esposa-mei",
+      "nome": "Regularização MEI esposa Ronaldo",
+      "valorCentavos": 15000,
+      "status": "pago",
+      "grupo": "extra",
+      "ordem": 13
+    },
+    {
+      "id": "guilherme",
+      "nome": "Guilherme",
+      "valorCentavos": 35000,
+      "status": "pago",
+      "grupo": "novo",
+      "ordem": 14
+    }
+  ]
+}
