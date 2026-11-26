@@ -66,27 +66,26 @@ function mapRow(row: {
 
 export async function ensureSeeded(): Promise<void> {
   const data = seed as SeedFile;
-  const existing = await sql<{ c: string }>("select count(*)::text as c from lancamentos");
-  if (Number(existing[0]?.c ?? 0) === 0) {
-    for (const item of data.lancamentos) {
-      await sql(
-        `insert into lancamentos (
-           id, nome, valor_centavos, status, grupo, vencimento, lote, lote_titulo, lote_valor_centavos, ordem
-         ) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
-        [
-          item.id,
-          item.nome,
-          item.valorCentavos,
-          item.status,
-          item.grupo,
-          item.vencimento ?? null,
-          item.lote ?? "",
-          item.loteTitulo ?? "",
-          item.loteValorCentavos ?? null,
-          item.ordem,
-        ],
-      );
-    }
+  await sql(`delete from lancamentos where id in ('gi-mei-1', 'gi-mei-2')`);
+  for (const item of data.lancamentos) {
+    await sql(
+      `insert into lancamentos (
+         id, nome, valor_centavos, status, grupo, vencimento, lote, lote_titulo, lote_valor_centavos, ordem
+       ) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+       on conflict (id) do nothing`,
+      [
+        item.id,
+        item.nome,
+        item.valorCentavos,
+        item.status,
+        item.grupo,
+        item.vencimento ?? null,
+        item.lote ?? "",
+        item.loteTitulo ?? "",
+        item.loteValorCentavos ?? null,
+        item.ordem,
+      ],
+    );
   }
 
   const caixa = await sql<{ c: string }>("select count(*)::text as c from caixinha");
