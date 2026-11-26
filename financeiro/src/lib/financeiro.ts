@@ -66,7 +66,7 @@ function mapRow(row: {
 
 export async function ensureSeeded(): Promise<void> {
   const data = seed as SeedFile;
-  await sql(`delete from lancamentos where id in ('gi-mei-1', 'gi-mei-2')`);
+  await sql(`delete from lancamentos where id = 'gi-mei'`);
   for (const item of data.lancamentos) {
     await sql(
       `insert into lancamentos (

@@ -96,12 +96,26 @@
       "ordem": 10
     },
     {
-      "id": "gi-mei",
-      "nome": "Regularização e abertura de MEI Gi",
-      "valorCentavos": 20000,
+      "id": "gi-mei-1",
+      "nome": "Gi",
+      "valorCentavos": 10000,
+      "status": "pago",
+      "grupo": "extra",
+      "lote": "gi-mei",
+      "loteTitulo": "Regularização e abertura de MEI Gi",
+      "loteValorCentavos": 20000,
+      "ordem": 11
+    },
+    {
+      "id": "gi-mei-2",
+      "nome": "Gi",
+      "valorCentavos": 10000,
       "status": "pendente",
       "grupo": "extra",
-      "ordem": 11
+      "lote": "gi-mei",
+      "loteTitulo": "Regularização e abertura de MEI Gi",
+      "loteValorCentavos": 20000,
+      "ordem": 12
     },
     {
       "id": "ronaldo-esposa-mei",
